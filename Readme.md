@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ксения Пучкова](https://up.htmlacademy.ru/javascript/17/user/43002).
-* Наставник: `Неизвестно`.
+* Наставник: `Нет`.
 
 ---
 
