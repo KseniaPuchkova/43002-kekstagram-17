@@ -5,17 +5,17 @@
   var LEVEL_MAX = 100 + '%';
   var VALUE_MAX = 100;
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-  var uploadFile = document.querySelector('#upload-file');
   var form = document.querySelector('.img-upload__form');
-  var imageRedactForm = document.querySelector('.img-upload__overlay');
+  var uploadFile = form.querySelector('#upload-file');
+  var imageRedactForm = form.querySelector('.img-upload__overlay');
   var imageRedactFormClose = imageRedactForm.querySelector('#upload-cancel');
   var effectLevelBar = imageRedactForm.querySelector('.effect-level');
   var effectLevelPin = imageRedactForm.querySelector('.effect-level__pin');
   var effectLevelDepth = imageRedactForm.querySelector('.effect-level__depth');
   var effectLevelValue = imageRedactForm.querySelector('.effect-level__value');
-  var effectRadioBtn = imageRedactForm.querySelectorAll('.effects__radio');
+  var effectRadioButtons = imageRedactForm.querySelectorAll('.effects__radio');
   var imgBigPreview = imageRedactForm.querySelector('.img-upload__preview img');
-  var effectsPreview = imageRedactForm.querySelectorAll('.effects__preview ');
+  var effectsPreviews = imageRedactForm.querySelectorAll('.effects__preview ');
   var hashtagsInput = imageRedactForm.querySelector('.text__hashtags');
   var comment = imageRedactForm.querySelector('.text__description');
   var btnCheckedValue;
@@ -94,7 +94,7 @@
       var reader = new FileReader();
       reader.addEventListener('load', function () {
         imgBigPreview.src = reader.result;
-        effectsPreview.forEach(function (item) {
+        effectsPreviews.forEach(function (item) {
           item.style.backgroundImage = 'url(' + reader.result + ')';
         });
       });
@@ -116,7 +116,7 @@
   imageRedactFormClose.addEventListener('click', closeImageRedactForm);
 
   var checkBtnValue = function () {
-    effectRadioBtn.forEach(function (radioBtn) {
+    effectRadioButtons.forEach(function (radioBtn) {
       if (radioBtn.checked) {
         btnCheckedValue = radioBtn.value;
       }
@@ -149,7 +149,7 @@
     setEffect(VALUE_MAX);
   };
 
-  effectRadioBtn.forEach(function (radioBtn) {
+  effectRadioButtons.forEach(function (radioBtn) {
     radioBtn.addEventListener('click', effectClickHandler);
   });
 
@@ -180,6 +180,10 @@
   };
 
   window.form = {
+    imageRedactForm: imageRedactForm,
+    effectLevelPin: effectLevelPin,
+    effectLevelDepth: effectLevelDepth,
+    effectLevelValue: effectLevelValue,
     setEffect: setEffect
   };
 
