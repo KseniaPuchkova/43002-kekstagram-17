@@ -14,6 +14,6 @@
   window.util = {
     body: body,
     main: main,
-    isEscEvent: isEscEvent,
+    isEscEvent: isEscEvent
   };
 })();
