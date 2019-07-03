@@ -10,31 +10,31 @@
     MINUS: -1,
     DEFAULT: '100%'
   };
-
-  var imgBigPreview = window.form.imageRedactForm.querySelector('.img-upload__preview');
-  var scaleButtonSmall = window.form.imageRedactForm.querySelector('.scale__control--smaller');
-  var scaleButtonBig = window.form.imageRedactForm.querySelector('.scale__control--bigger');
-  var scaleValue = window.form.imageRedactForm.querySelector('.scale__control--value');
+  var imageRedactForm = document.querySelector('.img-upload__overlay');
+  var imageBigPreview = imageRedactForm.querySelector('.img-upload__preview');
+  var scaleButtonMinus = imageRedactForm.querySelector('.scale__control--smaller');
+  var scaleButtonPlus = imageRedactForm.querySelector('.scale__control--bigger');
+  var scaleValue = imageRedactForm.querySelector('.scale__control--value');
 
   var setScale = function (scaleDirection) {
     var currentScaleValue = parseInt(scaleValue.value, 10);
     currentScaleValue = currentScaleValue + (Scale.STEP * scaleDirection);
     if (currentScaleValue >= Scale.MIN && currentScaleValue <= Scale.MAX) {
-      imgBigPreview.style.transform = 'scale(' + currentScaleValue / 100 + ')';
+      imageBigPreview.style.transform = 'scale(' + currentScaleValue / 100 + ')';
       scaleValue.value = currentScaleValue + '%';
     }
   };
 
-  scaleButtonSmall.addEventListener('click', function () {
+  scaleButtonMinus.addEventListener('click', function () {
     setScale(Scale.MINUS);
   });
 
-  scaleButtonBig.addEventListener('click', function () {
+  scaleButtonPlus.addEventListener('click', function () {
     setScale(Scale.PLUS);
   });
 
   var reset = function () {
-    imgBigPreview.style.transform = '';
+    imageBigPreview.style.transform = '';
     scaleValue.value = Scale.DEFAULT;
   };
 
