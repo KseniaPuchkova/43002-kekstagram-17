@@ -3,28 +3,30 @@
 (function () {
 
   var initSlider = function (callback) {
-    var MIN_COORDS = 0;
-    var MAX_COORDS = 450;
+    var Coords = {
+      MIN: 0,
+      MAX: 100
+    };
+    var effectLevel;
 
-    var pinMoveHandler = function (evt) {
-      evt.preventDefault();
-      var startCoordsX = evt.clientX;
+    var mouseDownHandler = function (downEvt) {
+      downEvt.preventDefault();
+      var startCoordX = downEvt.clientX;
 
       var mouseMoveHandler = function (moveEvt) {
         moveEvt.preventDefault();
-        var shiftX = startCoordsX - moveEvt.clientX;
-        startCoordsX = moveEvt.clientX;
-        var coordsPin = (window.form.effectLevelPin.offsetLeft - shiftX) + 'px';
+        var shiftX = startCoordX - moveEvt.clientX;
+        startCoordX = moveEvt.clientX;
+        var coordPin = Math.round((window.form.effectLevelPin.offsetLeft - shiftX) * 100 / window.form.effectLevelLine.offsetWidth);
 
-        if ((parseInt(coordsPin, 10) >= MIN_COORDS) && (parseInt(coordsPin, 10) <= MAX_COORDS)) {
-          window.form.effectLevelPin.style.left = coordsPin;
-          window.form.effectLevelDepth.style.width = coordsPin;
-          window.form.effectLevel = Math.round(parseInt(coordsPin, 10) / MAX_COORDS * 100);
-          window.form.effectLevelValue.value = window.form.effectLevel;
+        if (coordPin >= Coords.MIN && coordPin <= Coords.MAX) {
+          window.form.effectLevelPin.style.left = coordPin + '%';
+          window.form.effectLevelDepth.style.width = coordPin + '%';
+          effectLevel = coordPin;
+          window.form.effectLevelValue.value = effectLevel;
         }
-        callback(window.form.effectLevel);
+        callback(effectLevel);
       };
-
       var mouseUpHandler = function (upEvt) {
         upEvt.preventDefault();
         document.removeEventListener('mousemove', mouseMoveHandler);
@@ -35,9 +37,9 @@
       document.addEventListener('mouseup', mouseUpHandler);
     };
 
-    window.form.effectLevelPin.addEventListener('mousedown', pinMoveHandler);
+    window.form.effectLevelPin.addEventListener('mousedown', mouseDownHandler);
   };
 
-  initSlider(window.form.setEffect);
+  initSlider(window.effects.setEffect);
 
 })();
