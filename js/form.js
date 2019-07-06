@@ -13,12 +13,12 @@
   var effectLevelDepth = imageRedactForm.querySelector('.effect-level__depth');
   var effectLevelLine = imageRedactForm.querySelector('.effect-level__line');
   var imageBigPreview = imageRedactForm.querySelector('.img-upload__preview img');
-  var effectsPreviews = imageRedactForm.querySelectorAll('.effects__preview ');
+  var effectsPreviews = imageRedactForm.querySelectorAll('.effects__preview');
   var effectRadioButtons = imageRedactForm.querySelectorAll('.effects__radio');
   var hashtagsInput = imageRedactForm.querySelector('.text__hashtags');
   var comment = imageRedactForm.querySelector('.text__description');
 
-  var onFormEscPress = function (evt) {
+  var formEscPressHandler = function (evt) {
     window.util.isEscEvent(evt, hashtagsInput, comment, closeImageRedactForm);
   };
 
@@ -40,13 +40,13 @@
       reader.readAsDataURL(file);
       imageRedactForm.classList.remove('hidden');
       effectLevelBar.classList.add('hidden');
-      document.addEventListener('keydown', onFormEscPress);
+      document.addEventListener('keydown', formEscPressHandler);
     }
   };
 
   var closeImageRedactForm = function () {
     imageRedactForm.classList.add('hidden');
-    document.removeEventListener('keydown', onFormEscPress);
+    document.removeEventListener('keydown', formEscPressHandler);
     clearImageRedactForm();
   };
 
@@ -55,12 +55,14 @@
   imageRedactFormClose.addEventListener('click', closeImageRedactForm);
 
   form.addEventListener('submit', function (evt) {
-    window.backend.send(new FormData(form), closeImageRedactForm(), successHandler, errorHandler);
     evt.preventDefault();
+    window.backend.send(new FormData(form), successHandler, errorHandler);
+    closeImageRedactForm();
     uploadHandler();
   });
 
   var clearImageRedactForm = function () {
+    uploadFile.value = '';
     window.effects.reset();
     window.scale.reset();
     window.hashtagsValidity.reset();
@@ -81,11 +83,11 @@
   window.form = {
     imageRedactForm: imageRedactForm,
     imageBigPreview: imageBigPreview,
+    effectRadioButtons: effectRadioButtons,
     effectLevelPin: effectLevelPin,
     effectLevelDepth: effectLevelDepth,
     effectLevelValue: effectLevelValue,
     effectLevelLine: effectLevelLine,
-    effectLevelBar: effectLevelBar,
-    effectRadioButtons: effectRadioButtons
+    effectLevelBar: effectLevelBar
   };
 })();
