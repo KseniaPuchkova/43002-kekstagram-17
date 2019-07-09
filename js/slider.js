@@ -7,7 +7,6 @@
       MIN: 0,
       MAX: 100
     };
-
     var effectLevel;
 
     var movePinHandler = function (downEvt) {

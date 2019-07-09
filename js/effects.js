@@ -53,7 +53,7 @@
       'min': 1,
       'max': 3,
       'setEffect': function (level) {
-        window.form.imageBigPreview.style.filter = 'brightness(' + ((level * (this.max - this.min)) + this.min) + ')';
+        window.form.imageBigPicture.style.filter = 'brightness(' + ((level * (this.max - this.min)) + this.min) + ')';
       }
     }
   };
