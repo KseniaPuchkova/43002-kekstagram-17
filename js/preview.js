@@ -3,26 +3,24 @@
 (function () {
 
   var MAX_COMMENTS = 5;
-  var bigPictureElement = document.querySelector('.big-picture');
-  var commentsLoaderElement = bigPictureElement.querySelector('.social__comments-loader');
-  var socialCommentsContainer = bigPictureElement.querySelector('.social__comments');
-  var socialCommentsCount = bigPictureElement.querySelector('.social__comment-count');
+  var commentsLoader = window.bigPicture.querySelector('.social__comments-loader');
+  var commentsContainer = window.bigPicture.querySelector('.social__comments');
+  var commentsCount = window.bigPicture.querySelector('.social__comment-count');
   var bigPictureData;
   var index;
 
-  var getBigPicture = function (bigPicture) {
-    bigPictureData = bigPicture;
+  var openBigPicture = function (item) {
+    bigPictureData = item;
     index = 0;
     window.util.body.classList.add('modal-open');
-    document.querySelector('.big-picture').classList.remove('hidden');
-    bigPictureElement.querySelector('img').src = bigPicture.url;
-    bigPictureElement.querySelector('img').alt = 'Случайная фотография';
-    bigPictureElement.querySelector('.likes-count').textContent = bigPicture.likes;
-    bigPictureElement.querySelector('.social__caption').textContent = bigPicture.description.toString();
-    commentsLoaderElement.classList.remove('visually-hidden');
+    window.bigPicture.classList.remove('hidden');
+    window.bigPicture.querySelector('img').src = item.url;
+    window.bigPicture.querySelector('img').alt = 'Случайная фотография';
+    window.bigPicture.querySelector('.likes-count').textContent = item.likes;
+    window.bigPicture.querySelector('.social__caption').textContent = item.description;
+    commentsLoader.classList.remove('visually-hidden');
     clearComments();
-    addComments(bigPicture);
-    socialCommentsCount.innerHTML = socialCommentsContainer.children.length + ' из ' + bigPicture.comments.length + ' комментариев';
+    addComments(item);
   };
 
   var createComment = function (comment) {
@@ -39,6 +37,7 @@
     tagP.textContent = comment.message;
     tagLi.appendChild(tagImg);
     tagLi.appendChild(tagP);
+
     return tagLi;
   };
 
@@ -47,32 +46,31 @@
     arr.forEach(function (item) {
       fragment.appendChild(createComment(item));
     });
-    socialCommentsContainer.appendChild(fragment);
+    commentsContainer.appendChild(fragment);
   };
 
   var addComments = function (arr) {
     var startIndex = index;
-    var endIndex = index += MAX_COMMENTS;
-    appendComments(arr.comments.slice(startIndex, endIndex));
-    if (arr.comments.length === socialCommentsContainer.children.length) {
-      commentsLoaderElement.classList.add('visually-hidden');
+    var lastIndex = index += MAX_COMMENTS;
+    appendComments(arr.comments.slice(startIndex, lastIndex));
+    if (arr.comments.length === commentsContainer.children.length) {
+      commentsLoader.classList.add('visually-hidden');
     }
+    commentsCount.textContent = commentsContainer.children.length + ' из ' + arr.comments.length + ' комментариев';
   };
 
   var clearComments = function () {
-    socialCommentsContainer.innerHTML = '';
+    commentsContainer.innerHTML = '';
   };
 
   var сommentsClickHandler = function () {
     addComments(bigPictureData);
-    socialCommentsCount.innerHTML = socialCommentsContainer.children.length + ' из ' + bigPictureData.comments.length + ' комментариев';
   };
 
-  commentsLoaderElement.addEventListener('click', сommentsClickHandler);
+  commentsLoader.addEventListener('click', сommentsClickHandler);
 
   window.preview = {
-    bigPictureElement: bigPictureElement,
-    getBigPicture: getBigPicture
+    openBigPicture: openBigPicture
   };
 
 })();
