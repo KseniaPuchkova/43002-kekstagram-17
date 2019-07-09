@@ -13,7 +13,7 @@
       'min': null,
       'max': null,
       'setEffect': function () {
-        window.form.imageBigPreview.style.filter = '';
+        window.form.imageBigPicture.style.filter = '';
       }
     },
     'chrome': {
@@ -21,7 +21,7 @@
       'min': 0,
       'max': 1,
       'setEffect': function (level) {
-        window.form.imageBigPreview.style.filter = 'grayscale(' + level + ')';
+        window.form.imageBigPicture.style.filter = 'grayscale(' + level + ')';
       }
     },
     'sepia': {
@@ -29,7 +29,7 @@
       'min': 0,
       'max': 1,
       'setEffect': function (level) {
-        window.form.imageBigPreview.style.filter = 'sepia(' + level + ')';
+        window.form.imageBigPicture.style.filter = 'sepia(' + level + ')';
       }
     },
     'marvin': {
@@ -37,7 +37,7 @@
       'min': 0,
       'max': 100,
       'setEffect': function (level) {
-        window.form.imageBigPreview.style.filter = 'invert(' + (level * this.max) + '%)';
+        window.form.imageBigPicture.style.filter = 'invert(' + (level * this.max) + '%)';
       }
     },
     'phobos': {
@@ -45,7 +45,7 @@
       'min': 0,
       'max': 3,
       'setEffect': function (level) {
-        window.form.imageBigPreview.style.filter = 'blur(' + (level * this.max) + 'px)';
+        window.form.imageBigPicture.style.filter = 'blur(' + (level * this.max) + 'px)';
       }
     },
     'heat': {
@@ -65,11 +65,11 @@
   };
 
   var addClass = function (effectClass) {
-    var currentEffectClass = window.form.imageBigPreview.className;
-    if (window.form.imageBigPreview.classList.contains(currentEffectClass)) {
-      window.form.imageBigPreview.classList.remove(currentEffectClass);
+    var currentEffectClass = window.form.imageBigPicture.className;
+    if (window.form.imageBigPicture.classList.contains(currentEffectClass)) {
+      window.form.imageBigPicture.classList.remove(currentEffectClass);
     }
-    window.form.imageBigPreview.classList.add(effectClass);
+    window.form.imageBigPicture.classList.add(effectClass);
     window.form.effectLevelBar.classList.remove('hidden');
     if (effectClass === valueToEffect['none']['effectName']) {
       window.form.effectLevelBar.classList.add('hidden');
@@ -87,8 +87,8 @@
     setEffect(effectValueLevel);
   };
 
-  window.form.effectRadioButtons.forEach(function (radioBtn) {
-    radioBtn.addEventListener('click', function () {
+  window.form.effectRadioButtons.forEach(function (radioButton) {
+    radioButton.addEventListener('click', function () {
       effectPreviewClickHandler(EffectValue.MAX);
     });
   });
@@ -96,7 +96,7 @@
   var reset = function () {
     window.form.effectRadioButtons[0].checked = true;
     addClass(valueToEffect['none']['effectName']);
-    window.form.imageBigPreview.style.filter = '';
+    window.form.imageBigPicture.style.filter = '';
   };
 
   window.effects = {
