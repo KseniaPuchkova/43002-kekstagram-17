@@ -57,7 +57,7 @@
     evt.preventDefault();
     window.backend.send(new FormData(form), successHandler, errorHandler);
     closeImageRedactForm();
-    uploadHandler();
+    imageUploadHandler();
   });
 
   var clearImageRedactForm = function () {
@@ -67,8 +67,8 @@
     window.validation.reset();
   };
 
-  var uploadHandler = function () {
-    window.messages.createUploadMessage();
+  var imageUploadHandler = function () {
+    window.messages.createImageUploadMessage();
   };
 
   var successHandler = function () {
