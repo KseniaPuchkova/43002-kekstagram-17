@@ -2,6 +2,7 @@
 
 (function () {
 
+  var NEW_PICTURES_MAX = 10;
   var imageFiltersButtons = document.querySelectorAll('.img-filters__button');
   var buttonToValue = {
     'filter-popular': function (arr) {
@@ -10,7 +11,7 @@
     'filter-new': function (arr) {
       var picturesNew = arr.slice().sort(function () {
         return Math.random() - Math.random();
-      }).slice(0, 10);
+      }).slice(0, NEW_PICTURES_MAX);
       return picturesNew;
     },
     'filter-discussed': function (arr) {
