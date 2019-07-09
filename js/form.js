@@ -12,7 +12,7 @@
   var effectLevelValue = imageRedactForm.querySelector('.effect-level__value');
   var effectLevelDepth = imageRedactForm.querySelector('.effect-level__depth');
   var effectLevelLine = imageRedactForm.querySelector('.effect-level__line');
-  var imageBigPreview = imageRedactForm.querySelector('.img-upload__preview img');
+  var imageBigPicture = imageRedactForm.querySelector('.img-upload__preview img');
   var effectsPreviews = imageRedactForm.querySelectorAll('.effects__preview');
   var effectRadioButtons = imageRedactForm.querySelectorAll('.effects__radio');
   var hashtagsInput = imageRedactForm.querySelector('.text__hashtags');
@@ -32,7 +32,7 @@
     if (matches) {
       var reader = new FileReader();
       reader.addEventListener('load', function () {
-        imageBigPreview.src = reader.result;
+        imageBigPicture.src = reader.result;
         effectsPreviews.forEach(function (item) {
           item.style.backgroundImage = 'url(' + reader.result + ')';
         });
@@ -51,7 +51,6 @@
   };
 
   uploadFile.addEventListener('change', openImageRedactForm);
-
   imageRedactFormClose.addEventListener('click', closeImageRedactForm);
 
   form.addEventListener('submit', function (evt) {
@@ -65,7 +64,7 @@
     uploadFile.value = '';
     window.effects.reset();
     window.scale.reset();
-    window.hashtagsValidity.reset();
+    window.validation.reset();
   };
 
   var uploadHandler = function () {
@@ -82,7 +81,7 @@
 
   window.form = {
     imageRedactForm: imageRedactForm,
-    imageBigPreview: imageBigPreview,
+    imageBigPicture: imageBigPicture,
     effectRadioButtons: effectRadioButtons,
     effectLevelPin: effectLevelPin,
     effectLevelDepth: effectLevelDepth,
