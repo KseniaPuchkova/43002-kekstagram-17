@@ -8,7 +8,7 @@
     STEP: 25,
     PLUS: 1,
     MINUS: -1,
-    DEFAULT: '100%'
+    DEFAULT: 100 + '%'
   };
   var imageUploadPreview = window.form.imageRedactForm.querySelector('.img-upload__preview');
   var scaleButtonMinus = window.form.imageRedactForm.querySelector('.scale__control--smaller');

@@ -18,10 +18,6 @@
   var hashtagsInput = imageRedactForm.querySelector('.text__hashtags');
   var comment = imageRedactForm.querySelector('.text__description');
 
-  var formEscPressHandler = function (evt) {
-    window.util.isEscEvent(evt, hashtagsInput, comment, closeImageRedactForm);
-  };
-
   var openImageRedactForm = function () {
     var file = uploadFile.files[0];
     var fileName = file.name.toLowerCase();
@@ -48,6 +44,10 @@
     imageRedactForm.classList.add('hidden');
     document.removeEventListener('keydown', formEscPressHandler);
     clearImageRedactForm();
+  };
+
+  var formEscPressHandler = function (evt) {
+    window.util.isEscEvent(evt, hashtagsInput, comment, closeImageRedactForm);
   };
 
   uploadFile.addEventListener('change', openImageRedactForm);
