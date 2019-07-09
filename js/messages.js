@@ -20,7 +20,7 @@
     successInner = document.querySelector('.success__inner');
     var successButton = successInner.querySelector('.success__button');
     successButton.addEventListener('click', successButtonClickHandler);
-    document.addEventListener('keydown', successMessageEscHandler);
+    document.addEventListener('keydown', successMessageEscPressHandler);
     document.addEventListener('click', successOverlayClickHandler);
   };
 
@@ -34,14 +34,14 @@
     }
   };
 
-  var successMessageEscHandler = function (evt) {
+  var successMessageEscPressHandler = function (evt) {
     window.util.isEscEvent(evt, null, null, closeSuccessMessage);
   };
 
   var closeSuccessMessage = function () {
     var successMessage = document.querySelector('.success');
     window.util.main.removeChild(successMessage);
-    document.removeEventListener('keydown', successMessageEscHandler);
+    document.removeEventListener('keydown', successMessageEscPressHandler);
     document.removeEventListener('click', successOverlayClickHandler);
   };
 
@@ -52,7 +52,7 @@
     errorButtons.forEach(function (item) {
       item.addEventListener('click', errorMessageClickHandler);
     });
-    document.addEventListener('keydown', errorMessageEscHandler);
+    document.addEventListener('keydown', errorMessageEscPressHandler);
     document.addEventListener('click', errorOverlayClickHandler);
   };
 
@@ -66,14 +66,14 @@
     }
   };
 
-  var errorMessageEscHandler = function (evt) {
+  var errorMessageEscPressHandler = function (evt) {
     window.util.isEscEvent(evt, null, null, closeErrorMessage);
   };
 
   var closeErrorMessage = function () {
     var errorMessage = document.querySelector('.error');
     window.util.main.removeChild(errorMessage);
-    document.removeEventListener('keydown', errorMessageEscHandler);
+    document.removeEventListener('keydown', errorMessageEscPressHandler);
     document.removeEventListener('click', errorOverlayClickHandler);
   };
 
