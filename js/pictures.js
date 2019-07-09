@@ -17,7 +17,7 @@
 
     var openPicture = function () {
       window.preview.openBigPicture(item);
-      document.addEventListener('keydown', closeBigPictureOnEsc);
+      document.addEventListener('keydown', bigPictureEscPressHandler);
     };
 
     picture.addEventListener('click', openPicture);
@@ -28,10 +28,10 @@
   var closeBigPicture = function () {
     window.bigPicture.classList.add('hidden');
     window.util.body.classList.remove('modal-open');
-    document.removeEventListener('keydown', closeBigPictureOnEsc);
+    document.removeEventListener('keydown', bigPictureEscPressHandler);
   };
 
-  var closeBigPictureOnEsc = function (evt) {
+  var bigPictureEscPressHandler = function (evt) {
     window.util.isEscEvent(evt, commentBigPicture, null, closeBigPicture);
   };
 
